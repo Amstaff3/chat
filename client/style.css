@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: sans-serif;
+    padding: 30px;
+    background-image: url('img/bg.jpg');
+    color: #fff;
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.8) 0 0 0 10000px inset;
+}
+
+img{
+    width: 30%;
+    max-width: 300px;
+}
+
+header, footer {
+    margin-top: 5px;
+    background-color: lightgray;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+main {
+    border: 1px solid #ccc;
+    width: 100%;
+    flex-grow: 2;
+    border-radius: 15px;
+    overflow-y: scroll;
+    max-width: 650px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 50px;
+}
+
+/*.chat-container1, .chat-container2 { 
+    height: 65px;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.chat-container1 {
+    text-align: left;
+    background-color: rgb(188, 250, 146);
+    color: #000; 
+}
+
+.chat-container2 {
+    text-align: right;
+    background-color: rgb(255, 252, 248);
+    color: #000;
+}
+
+.message1, .message2 {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message1 {
+    text-align: left;
+    background-color: rgb(188, 250, 146);
+    color: #000; 
+}
+
+.message2 {
+    text-align: right;
+    background-color: rgb(255, 252, 248);
+    color: #000;
+}
+
+.message1 img, .message2 img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message1, .message2 {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}*/
+
+.chat-container1 {
+    display: flex;
+    text-align: left;
+    background-color: rgb(188, 250, 146);
+    color: #000;
+    height: 65px;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message1 {
+    text-align: left;
+    background-color: rgb(188, 250, 146);
+    color: #000;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message1 img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message1 {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 30px;
+    font-size: 18px;
+}

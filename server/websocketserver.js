@@ -40,7 +40,7 @@ const onClientMessage = (ws, message) => {
 };
 
 const onRedisMessage = (message) => {
-  console.log("Message received: " + message);
+  console.log("Redis Message received: " + message);
   clients.forEach((client) => client.send(message));
 };
 

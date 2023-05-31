@@ -25,7 +25,7 @@ function sendMessage() {
     const formattedMessage = `${getClientName()}: ${message}`;
     socket.send(formattedMessage);
     messageInput.value = "";
-    displayMessage(formattedMessage);
+    /*displayMessage(formattedMessage);*/
   }
 }
 

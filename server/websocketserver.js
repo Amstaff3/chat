@@ -1,3 +1,62 @@
+//Server_Code//
+const WebSocket = require("ws");
+const redis = require("redis");
+
+let publisher;
+const clients = [];
+
+// Initialisieren des Websocket-Servers
+const initializeWebsocketServer = async (server) => {
+  const client = redis.createClient({
+    socket: {
+      host: process.env.REDIS_HOST || "localhost",
+      port: process.env.REDIS_PORT || "6379",
+    },
+  });
+
+  const subscriber = client.duplicate();
+  await subscriber.connect();
+  publisher = client.duplicate();
+  await publisher.connect();
+
+  const websocketServer = new WebSocket.Server({ server });
+  websocketServer.on("connection", onConnection);
+  websocketServer.on("error", console.error);
+  await subscriber.subscribe("newMessage", onRedisMessage);
+  await publisher.publish("newMessage", "Hello from Redis!");
+};
+
+const onConnection = (ws) => {
+  console.log("New websocket connection");
+  ws.on("close", () => onClose(ws));
+  ws.on("message", (message) => onClientMessage(ws, message));
+  ws.send("Hello Client!");
+  clients.push(ws);
+};
+
+const onClientMessage = (ws, message) => {
+  console.log("Message received: " + message);
+  publisher.publish("newMessage", message);
+};
+
+const onRedisMessage = (message) => {
+  console.log("Message received: " + message);
+  clients.forEach((client) => client.send(message));
+};
+
+const onClose = (ws) => {
+  console.log("Websocket connection closed");
+  const index = clients.indexOf(ws);
+  if (index !== -1) {
+    clients.splice(index, 1);
+  }
+};
+
+module.exports = { initializeWebsocketServer };
+
+
+//-------------------------------------------------------------------------------------------//
+/*
 const WebSocket = require("ws");
 const redis = require("redis");
 let publisher;
@@ -60,4 +119,48 @@ const onClose = (ws) => {
   //TODO!!!!!! Entfernen Sie den Client aus dem clients-Array
 };
 
+// Implementiren vom Namen //
+// Elemente zum Anzeigen des Clientnamens und der Chat-Nachrichten //
+const clientNameInput = document.getElementById("clientName");
+const chatMessages = document.getElementById("chatMessages");
+
+// Event-Listener für das Senden einer Nachricht über die WebSocket-Verbindung //
+document.getElementById("send1").addEventListener("click", function () {
+  const clientName = clientNameInput.value;
+  const messageInput = document.getElementById("message1");
+  const message = messageInput.value;
+
+  // Überprüfen, ob sowohl der Clientname als auch die Nachricht vorhanden sind //
+  if (clientName && message) {
+    // Nachricht formatieren: "[Clientname]: [Nachricht]" //
+    const formattedMessage = `${clientName}: ${message}`;
+
+    // Nachricht an den Server senden
+    socket.send(formattedMessage);
+    messageInput.value = "";
+
+    // Anzeigen der gesendeten Nachricht auf der Webseite //
+    displayMessage(formattedMessage);
+  }
+});
+
+// Event-Listener für das Empfangen von Nachrichten über die WebSocket-Verbindung //
+socket.addEventListener("message", (event) => {
+  const message = event.data;
+  displayMessage(message);
+});
+
+// Funktion zum Anzeigen der Nachricht auf der Webseite //
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.textContent = message;
+  chatMessages.appendChild(messageElement);
+}
+
+
 module.exports = { initializeWebsocketServer };
+*/
+//-------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------//
+

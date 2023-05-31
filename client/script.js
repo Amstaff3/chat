@@ -1,3 +1,113 @@
+//Client_Server//
+const socket = new WebSocket("ws://localhost:3000");
+
+// Event-Listener für das Empfangen von Nachrichten über die WebSocket-Verbindung //
+socket.addEventListener("message", (event) => {
+  console.log(`Nachricht empfangen: ${event.data}`);
+  displayMessage(event.data);
+});
+
+socket.addEventListener("close", (event) => {
+  console.log("WebSocket geschlossen.");
+});
+
+socket.addEventListener("error", (event) => {
+  console.error("WebSocket-Fehler:", event);
+});
+
+// Wenn Benutzer eine Nachricht senden möchte, liest den Inhalt des Texteingabefelds, 
+//formatiert die Nachricht und sendet sie über WebSocket an Server,
+//Anschliessend wird Texteingabefeld geleert und formatierte Nachricht wird zur Anzeige hinzugefügt.
+function sendMessage() {
+  const messageInput = document.getElementById("message1");
+  const message = messageInput.value;
+  if (message) {
+    const formattedMessage = `${getClientName()}: ${message}`;
+    socket.send(formattedMessage);
+    messageInput.value = "";
+    displayMessage(formattedMessage);
+  }
+}
+
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("message1");
+  const messageText = document.createElement("p");
+  messageText.textContent = message;
+  messageElement.appendChild(messageText);
+  chatMessages.appendChild(messageElement);
+}
+
+// Tastatur überprüfung ob es eineEingabetaste ist //
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+}
+
+// Namenseingabefelds und gibt eingegebenen Namen zurück oder den Standardnamen "Anonym", wenn kein Name angegeben wurde //
+function getClientName() {
+  return document.getElementById("clientName").value || "Anonym";
+}
+
+const chatMessages = document.getElementById("chatMessages");
+
+
+
+
+/* Ausgabe ohne style und wird zwei mal angezeigt weil der Event-Listener für das Empfangen von Nachrichten sowohl im JavaScript-Code als auch im WebSocket-Server-Code hinzugefügt ist 
+const socket = new WebSocket("ws://localhost:3000");
+
+socket.addEventListener("open", (event) => {
+  console.log("WebSocket verbunden!");
+  const message = document.getElementById("message1");
+  socket.send(`Hallo, Server! Mein Name ist ${getClientName()}`);
+  message.value = "";
+});
+
+socket.addEventListener("message", (event) => {
+  console.log(`Nachricht empfangen: ${event.data}`);
+  displayMessage(event.data);
+});
+
+socket.addEventListener("close", (event) => {
+  console.log("WebSocket geschlossen.");
+});
+
+socket.addEventListener("error", (event) => {
+  console.error("WebSocket-Fehler:", event);
+});
+
+function sendMessage() {
+  const messageInput = document.getElementById("message1");
+  const message = messageInput.value;
+  if (message) {
+    const formattedMessage = `${getClientName()}: ${message}`;
+    socket.send(formattedMessage);
+    messageInput.value = "";
+    displayMessage(formattedMessage);
+  }
+}
+
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+}
+
+function getClientName() {
+  return document.getElementById("clientName").value || "Anonym";
+}
+
+const chatMessages = document.getElementById("chatMessages");
+
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.textContent = message;
+  chatMessages.appendChild(messageElement);
+}
+/*
+/* ohne UserName Code
 // Erstellt eine neue WebSocket-Verbindung //
 const socket = new WebSocket("ws://localhost:3000");
 
@@ -54,6 +164,9 @@ function displayMessage(message) {
 
   // Anzeigen der gesendeten Nachricht auf der Webseite //
   displayMessage(message);
+  /*
+
+
 
 
 

@@ -1,14 +1,14 @@
-// Erstellt eine neue WebSocket-Verbindung
+// Erstellt eine neue WebSocket-Verbindung //
 const socket = new WebSocket("ws://localhost:3000");
 
-// Event-Listener für das Öffnen der WebSocket-Verbindung
+// Event-Listener für das Öffnen der WebSocket-Verbindung //
 socket.addEventListener("open", (event) => {
   console.log("WebSocket verbunden!");
   const message = document.getElementById("message");
   socket.send("Hallo, Server!");
 });
 
-// Event-Listener für das Empfangen von Nachrichten über die WebSocket-Verbindung
+// Event-Listener für das Empfangen von Nachrichten über die WebSocket-Verbindung //
 socket.addEventListener("message", (event) => {
   console.log(`Nachricht empfangen: ${event.data}`);
   const chatMessages = document.getElementById("chatMessages");
@@ -18,22 +18,43 @@ socket.addEventListener("message", (event) => {
   chatMessages.appendChild(messageElement);
 });
 
-// Event-Listener für das Schließen der WebSocket-Verbindung
+// Event-Listener für das Schliessen der WebSocket-Verbindung //
 socket.addEventListener("close", (event) => {
   console.log("WebSocket geschlossen.");
 });
 
-// Event-Listener für Fehler in der WebSocket-Verbindung
+// Event-Listener für Fehler in der WebSocket-Verbindung //
 socket.addEventListener("error", (event) => {
   console.error("WebSocket-Fehler:", event);
 });
 
-// Funktion zum Senden einer Nachricht über die WebSocket-Verbindung, wenn der Button geklickt wird
+// Funktion zum Senden einer Nachricht über die WebSocket-Verbindung, wenn der Button geklickt wird //
 function sendMessage() {
   const messageInput = document.getElementById("message1");
   socket.send(messageInput.value);
   messageInput.value = "";
+} 
+
+// Funktion mit enter senden weill es mich nervte //
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    sendMessage();
+  }
 }
+
+// Element zum Anzeigen der Chat-Nachrichten //
+const chatMessages = document.getElementById("chatMessages");
+
+// Funktion zum Anzeigen der Nachricht auf der Webseite //
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.textContent = message;
+  chatMessages.appendChild(messageElement);
+}
+
+  // Anzeigen der gesendeten Nachricht auf der Webseite //
+  displayMessage(message);
+
 
 
 /*zum Testen alt ohne Websocket*
@@ -45,7 +66,7 @@ document.getElementById('send1').addEventListener('click', function() {
 });
 */
 
-/*Alter Code keine Anzeige in HTML
+/*Alter Code keine Anzeige in HTML 
 // Erstellelt neue WebSocket-Verbindung //
 const socket = new WebSocket("ws://localhost:3000");
 

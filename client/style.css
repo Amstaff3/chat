@@ -47,7 +47,55 @@ main {
     padding: 50px;
 }
 
-/*.chat-container1, .chat-container2 { 
+.chat-container1 {
+    display: flex;
+    text-align: left;
+    background-color: rgb(188, 250, 146);
+    color: #000;
+    height: 65px;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message1 {
+    text-align: left;
+    background-color: rgb(188, 250, 146);
+    color: #000;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message1 img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message1 {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+/*ursprünlich für html mit zwei chats
+.chat-container1, .chat-container2 { 
     height: 65px;
     margin-top: 40px;
     padding: 10px;
@@ -98,50 +146,3 @@ main {
     padding: 10px;
     border-radius: 10px;
 }*/
-
-.chat-container1 {
-    display: flex;
-    text-align: left;
-    background-color: rgb(188, 250, 146);
-    color: #000;
-    height: 65px;
-    margin-top: 40px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.message1 {
-    text-align: left;
-    background-color: rgb(188, 250, 146);
-    color: #000;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.message1 img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.message1 {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-input {
-    width: 70%;
-    padding: 10px;
-    margin-right: 10px;
-}
-
-button {
-    cursor: pointer;
-    padding: 10px 30px;
-    font-size: 18px;
-}

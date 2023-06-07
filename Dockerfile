@@ -1,17 +1,18 @@
-# Use the official Node.js image as the base image
+# Verwende das offizielle Node.js-Image als Basisimage
 FROM node:18
 
-# Set the working directory inside the container
-WORKDIR ...
+# Setze das Arbeitsverzeichnis innerhalb des Containers
+WORKDIR /app
 
-# Copy the package.json and package-lock.json files to the container
-COPY ...
+# Kopiere die package.json und package-lock.json Dateien in den Container
+COPY package.json package-lock.json ./
 
-# Install the dependencies
-RUN ...
+# Installiere die Abhängigkeiten
+RUN yarn install
 
-# Copy the source code to the container
-COPY ...
+# Kopiere den Quellcode in den Container
+COPY . .
 
-# Start the server when the container starts
-CMD ...
+# Starte den Server beim Starten des Containers
+CMD ["yarn", "start"]
+

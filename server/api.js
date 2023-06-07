@@ -1,10 +1,11 @@
 const initializeAPI = (app) => {
-  // default REST api endpoint
+  // Standard REST-API-Endpunkt
   app.get("/api/hello", hello);
+  // Weitere API-Endpunkte hier hinzufügen
 };
 
 const hello = (req, res) => {
-  res.send("Hello World!");
+  res.send("Hallo Welt!");
 };
 
 module.exports = { initializeAPI };

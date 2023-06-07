@@ -1,3 +1,4 @@
+
 const express = require("express");
 const http = require("http");
 var livereload = require("livereload");
@@ -5,11 +6,11 @@ var connectLiveReload = require("connect-livereload");
 const { initializeWebsocketServer } = require("./server/websocketserver");
 const { initializeAPI } = require("./server/api");
 
-// Create the express server
+// Erstelle den Express-Server
 const app = express();
 const server = http.createServer(app);
 
-// create a livereload server
+// Erstelle einen LiveReload-Server
 const env = process.env.NODE_ENV || "development";
 if (env !== "production") {
   const liveReloadServer = livereload.createServer();
@@ -18,24 +19,24 @@ if (env !== "production") {
       liveReloadServer.refresh("/");
     }, 100);
   });
-  // use livereload middleware
+ // Verwende das LiveReload-Middleware
   app.use(connectLiveReload());
 }
 
-// deliver static files from the client folder like css, js, images
+// Liefere statische Dateien aus dem "client"-Verzeichnis wie CSS, JavaScript und Bilder
 app.use(express.static("client"));
-// route for the homepage
+// Route für die Startseite
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/client/index.html");
 });
 
-// Allowing top-level await
+// Ermögliche Top-Level Await
 (async function () {
-  // Initialize the websocket server
+   // Initialisiere den WebSocket-Server
   await initializeWebsocketServer(server);
-  // Initialize the REST api
+  // Initialisiere die REST-API
   initializeAPI(app);
-  //start the web server
+  // Starte den Webserver
   const serverPort = process.env.PORT || 3000;
   server.listen(serverPort, () => {
     console.log(

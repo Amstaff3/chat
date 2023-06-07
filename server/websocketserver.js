@@ -1,4 +1,5 @@
-//Server_Code//
+
+//Server_Code// zeigt chats korrekt an!!!!
 const WebSocket = require("ws");
 const redis = require("redis");
 
@@ -30,7 +31,7 @@ const onConnection = (ws) => {
   console.log("New websocket connection");
   ws.on("close", () => onClose(ws));
   ws.on("message", (message) => onClientMessage(ws, message));
-  ws.send("Hello Client!");
+  ws.send("Hello Teko Client!");
   clients.push(ws);
 };
 
@@ -54,8 +55,84 @@ const onClose = (ws) => {
 
 module.exports = { initializeWebsocketServer };
 
-
 //-------------------------------------------------------------------------------------------//
+
+//Test probier eine userlist zu erstellen geht nicht //
+/*const WebSocket = require("ws");
+const redis = require("redis");
+
+let publisher;
+const clients = [];
+const activeUsers = new Set();
+
+const initializeWebsocketServer = async (server) => {
+  const client = redis.createClient({
+    socket: {
+      host: process.env.REDIS_HOST || "localhost",
+      port: process.env.REDIS_PORT || "6379",
+    },
+  });
+
+  const subscriber = client.duplicate();
+  await subscriber.connect();
+  publisher = client.duplicate();
+  await publisher.connect();
+
+  const websocketServer = new WebSocket.Server({ server });
+  websocketServer.on("connection", onConnection);
+  websocketServer.on("error", console.error);
+  await subscriber.subscribe("newMessage", onRedisMessage);
+  await publisher.publish("newMessage", "Hello from Redis!");
+};
+
+const onConnection = (ws) => {
+  console.log("New websocket connection");
+  ws.on("close", () => onClose(ws));
+  ws.on("message", (message) => onClientMessage(ws, message));
+  ws.send("Hello Teko Client!");
+
+  // Füge den Benutzer zur Liste der aktiven Benutzer hinzu
+  activeUsers.add(ws);
+
+  // Sende die aktualisierte Benutzerliste an alle Clients
+  broadcastActiveUsers();
+};
+
+const onClientMessage = (ws, message) => {
+  console.log("Message received: " + message);
+  publisher.publish("newMessage", message);
+};
+
+const onRedisMessage = (message) => {
+  console.log("Redis Message received: " + message);
+  clients.forEach((client) => client.send(message));
+};
+
+const onClose = (ws) => {
+  console.log("Websocket connection closed");
+  const index = clients.indexOf(ws);
+  if (index !== -1) {
+    clients.splice(index, 1);
+  }
+
+  // Entferne den Benutzer aus der Liste der aktiven Benutzer
+  activeUsers.delete(ws);
+
+  // Sende die aktualisierte Benutzerliste an alle Clients
+  broadcastActiveUsers();
+};
+
+const broadcastActiveUsers = () => {
+  const activeUsersArray = Array.from(activeUsers).map((ws) => ws.getClientName());
+  clients.forEach((client) => client.send(JSON.stringify({ type: "userList", payload: activeUsersArray })));
+};
+
+
+module.exports = { initializeWebsocketServer };
+*/
+
+//--------------------------------------------------------------------------------------------//
+
 /*
 const WebSocket = require("ws");
 const redis = require("redis");
@@ -160,7 +237,4 @@ function displayMessage(message) {
 
 module.exports = { initializeWebsocketServer };
 */
-//-------------------------------------------------------------------------------------------//
-//-------------------------------------------------------------------------------------------//
-//-------------------------------------------------------------------------------------------//
 

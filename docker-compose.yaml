@@ -9,9 +9,32 @@ services:
 
 chat:
   image: chat/zeljo
+  restart: always
   ports:
-    -9000:3000
+    - 9000:3000
+  
   environment:
   - REDIS_Host=redis
-  depends on:configs:
+  - REDIS_Port=6379
+  
+  depends on:
     -redis
+
+#apiVersion: v1
+#kind: Config
+#clusters:
+#- name: "teko-kubernetes"
+#  cluster:
+#    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJlRENDQVIyZ0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQWpNU0V3SHdZRFZRUUREQmhyTTNNdGMyVnkKZG1WeUxXTmhRREUyT0RFNU1UQXlPVFF3SGhjTk1qTXdOREU1TVRNeE9ERTBXaGNOTXpNd05ERTJNVE14T0RFMApXakFqTVNFd0h3WURWUVFEREJock0zTXRjMlZ5ZG1WeUxXTmhRREUyT0RFNU1UQXlPVFF3V1RBVEJnY3Foa2pPClBRSUJCZ2dxaGtqT1BRTUJCd05DQUFST1NhN215Sk9McHE1Nkh1YXdlYStVN3RwSVRTZVJ1U1RFMUd4SnFQQjkKOGthVnFkZ0k5OXVBUDZ3ZmxlRlExN0pTc0FOS3Y5UzdVSTZkdll0RFVNYU1vMEl3UURBT0JnTlZIUThCQWY4RQpCQU1DQXFRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVVFhNkpBSUlOdUQvQUw2UGI5cmRCCnBXYWQvZFV3Q2dZSUtvWkl6ajBFQXdJRFNRQXdSZ0loQUpjWFh0M1BqbEJGUjJrWGxIMFkvOElFd004dGtJd3MKR1UwT0oxVExQRElkQWlFQXVvaU5TbjN6T1ZiSmg0eFBiYUlUcDcvNTNFYThFTkRJekhmM05lMSt6L2M9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+#    server: "https://webhost.internet-box.ch:6443"
+#contexts:
+#- name: "levnajic-teko7@teko-kubernetes"
+#  context:
+#    cluster: "teko-kubernetes"
+#    namespace: "teko7"
+#    user: "levnajic"
+#users:
+#- name: "levnajic"
+#  user:
+#    token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IlMyd2NqVVJjeTRqWnY3RmZOUlpHTHNUTDl0NTdaSDNabGllLXJNNWgwSk0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0ZWtvNyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJsZXZuYWppYy10b2tlbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJsZXZuYWppYyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImQyYjkyNGE0LTkwODYtNDEzZS05MThiLThlY2ZhYWQ0ODc3YSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDp0ZWtvNzpsZXZuYWppYyJ9.FLi-ybqzlIN3BjKkGOZsUi32q_RwHsSMSZ9c9FxbBFyOYKa5cMZD5QjgwfhuRspEgWEVfO9CLhAPygthZhMK0pIbS3fo5x0SRVycOlHCetpdqFRDNpLgRnDpaz6F4lSOpdoYEac5kbYjWAlhUp6PvBuOFDzo7-DO35r-_F7hVxmFvuowxTviFa3e5AcNz2xV6qsPJL5B3Mw5lnpwfgrA8SAOFWJbXCR8xFP8P21ByHy57uM3LR7iIaEN4AaDl9djVtjZY3XaMHAhRDYhoqjNDjObW_dSsu3rI7q3FUHZGAs4uScjbosoM_rsox1rlntnNdMRzYMcSewWsO96KSUZYQ"
+#current-context: "levnajic-teko7@teko-kubernetes"

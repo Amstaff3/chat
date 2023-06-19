@@ -1,24 +1,19 @@
-version: '3.8'
-
+version: '3'
 services:
+  chat:
+    image: zeljo/zeljko_teko:latest
+    ports:
+      - 8080:80
+      - 3000:3000
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
   redis:
-    image: redis:alpine
-    restart: always
+    image: redis:latest
     ports:
       - 6379:6379
-
-chat:
-  image: chat/zeljo
-  restart: always
-  ports:
-    - 9000:3000
-  
-  environment:
-  - REDIS_Host=redis
-  - REDIS_Port=6379
-  
-  depends on:
-    -redis
 
 #apiVersion: v1
 #kind: Config

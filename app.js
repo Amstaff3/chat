@@ -3,7 +3,7 @@ const express = require("express");
 const http = require("http");
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
-const { initializeWebsocketServer } = require("./server/websocketserver");
+const { initializeWebsocketServer } = require("./websocketserver");
 const { initializeAPI } = require("./server/api");
 
 // Erstelle den Express-Server

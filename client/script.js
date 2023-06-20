@@ -72,6 +72,97 @@ const chatMessages = document.getElementById("chatMessages");
 
 
 //--------------------------------------------------------------------------------------------//
+/*
+Letzter Versuch eine User Liste und namensänderung zu Implementieren wie immer gescheitert
+// WebSocket-Verbindung
+const socket = new WebSocket("ws://localhost:3000");
+
+// Event-Listener für das Empfangen von Nachrichten über die WebSocket-Verbindung
+socket.addEventListener("message", (event) => {
+  console.log(`Nachricht empfangen: ${event.data}`);
+  displayMessage(event.data);
+});
+
+socket.addEventListener("close", (event) => {
+  console.log("WebSocket geschlossen.");
+});
+
+socket.addEventListener("error", (event) => {
+  console.error("WebSocket-Fehler:", event);
+});
+
+// Benutzerprofile mit Profilbildern
+const userProfiles = {
+  Tester1: "img/profile.jpg",
+  Tester2: "img/profile1.jpg",
+  Tester3: "img/profile2.jpg",
+  Tester4: "img/profile3.jpg",
+  // Weitere Benutzerprofile hier hinzufügen
+  Anonym: "img/anonym_profile.jpg", // Profilbild für anonyme Benutzer
+};
+
+// Ändert den Benutzernamen
+function changeUsername() {
+  const usernameInput = document.getElementById("username");
+  const newUsername = usernameInput.value;
+  if (newUsername) {
+    socket.send(JSON.stringify({ type: "changeUsername", username: newUsername }));
+    usernameInput.value = "";
+  }
+}
+
+// Event-Listener für den Klick auf den "Ändern"-Button
+const changeUsernameBtn = document.getElementById("changeUsernameBtn");
+changeUsernameBtn.addEventListener("click", changeUsername);
+
+
+// Wenn Benutzer eine Nachricht senden möchte, liest den Inhalt des Texteingabefelds,
+// formatiert die Nachricht und sendet sie über WebSocket an den Server,
+// Anschließend wird das Texteingabefeld geleert und die formatierte Nachricht wird zur Anzeige hinzugefügt.
+function sendMessage() {
+  const messageInput = document.getElementById("message1");
+  const message = messageInput.value;
+  if (message) {
+    const formattedMessage = `${getClientName()}: ${message}`;
+    socket.send(formattedMessage);
+    messageInput.value = "";
+  }
+}
+
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("message1");
+
+  const clientName = getClientName();
+  const profileImage = document.createElement("img");
+  profileImage.src = userProfiles[clientName] || userProfiles["Anonym"];
+  profileImage.alt = "Profilbild des Benutzers";
+  messageElement.appendChild(profileImage);
+
+  const messageText = document.createElement("p");
+  messageText.textContent = message;
+  messageElement.appendChild(messageText);
+
+  chatMessages.appendChild(messageElement);
+}
+
+// Tastaturüberprüfung, ob es sich um eine Eingabetaste handelt
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Verhindert Zeilenumbruch im Textfeld
+    sendMessage();
+  }
+}
+
+// Namenseingabefelds und gibt immer das gleiche Profilbild zurück
+function getClientName() {
+  return document.getElementById("clientName").value || "Anonym";
+}
+
+const chatMessages = document.getElementById("chatMessages");
+*/
+
+//--------------------------------------------------------------------------------------------//
 
 //geht leider nicht probiert user anzuzeigen die aktiv sind //
 /*const socket = new WebSocket("ws://localhost:3000");

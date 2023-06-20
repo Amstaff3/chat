@@ -55,6 +55,76 @@ const onClose = (ws) => {
 
 module.exports = { initializeWebsocketServer };
 
+/*
+Letzter Versuch eine User Liste und namensänderung zu Implementieren wie immer gescheitert
+
+//Server_Code// zeigt chats korrekt an!!!!
+const WebSocket = require("ws");
+const redis = require("redis");
+
+let publisher;
+const clients = [];
+
+// Initialisieren des WebSocket-Servers
+const initializeWebsocketServer = async (server) => {
+  const client = redis.createClient({
+    socket: {
+      host: process.env.REDIS_HOST || "localhost",
+      port: process.env.REDIS_PORT || "6379",
+    },
+  });
+
+  const subscriber = client.duplicate();
+  await subscriber.connect();
+  publisher = client.duplicate();
+  await publisher.connect();
+
+  const websocketServer = new WebSocket.Server({ server });
+  websocketServer.on("connection", onConnection);
+  websocketServer.on("error", console.error);
+  await subscriber.subscribe("newMessage", onRedisMessage);
+  await publisher.publish("newMessage", "Hallo von Redis!");
+};
+
+const onConnection = (ws) => {
+  console.log("Neue WebSocket-Verbindung");
+  ws.on("close", () => onClose(ws));
+  ws.on("message", (message) => onClientMessage(ws, message));
+  ws.send("Hallo Teko Client!");
+  clients.push(ws);
+};
+
+const onClientMessage = (ws, message) => {
+  console.log("Nachricht empfangen: " + message);
+  const parsedMessage = JSON.parse(message);
+
+  if (parsedMessage.type === "changeUsername") {
+    // Aktualisiere den Benutzernamen in der Liste der aktiven Benutzer
+    activeUsers[client.id] = parsedMessage.username;
+    broadcastActiveUsers();
+    return;
+  }
+
+  publisher.publish("newMessage", message);
+};
+
+
+const onRedisMessage = (message) => {
+  console.log("Redis-Nachricht empfangen: " + message);
+  clients.forEach((client) => client.send(message));
+};
+
+const onClose = (ws) => {
+  console.log("WebSocket-Verbindung geschlossen");
+  const index = clients.indexOf(ws);
+  if (index !== -1) {
+    clients.splice(index, 1);
+  }
+};
+
+module.exports = { initializeWebsocketServer };
+*/
+
 //-------------------------------------------------------------------------------------------//
 
 //Test probier eine userlist zu erstellen geht nicht //
